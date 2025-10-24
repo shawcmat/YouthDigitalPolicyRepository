@@ -1,0 +1,33 @@
+state,statute_number,year,status
+California,CA-100,2020,failed
+California,CA-101,2021,passed
+California,CA-102,2022,in progress
+Texas,TX-202,2022,failed
+New York,NY-303,2020,in progress
+Florida,FL-404,2023,passed
+Illinois,IL-505,2021,failed
+Ohio,OH-606,2022,passed
+Georgia,GA-707,2023,in progress
+Washington,WA-808,2020,passed
+Arizona,AZ-909,2021,failed
+Massachusetts,MA-010,2022,passed
+Michigan,MI-111,2023,in progress
+Pennsylvania,PA-212,2021,passed
+North Carolina,NC-313,2022,failed
+Virginia,VA-414,2020,passed
+Colorado,CO-515,2023,passed
+Minnesota,MN-616,2021,failed
+Oregon,OR-717,2022,in progress
+New Jersey,NJ-818,2020,passed
+Tennessee,TN-919,2023,failed
+Maryland,MD-020,2021,passed
+Alabama,AL-121,2022,passed
+Wisconsin,WI-232,2023,in progress
+Missouri,MO-343,2021,failed
+South Carolina,SC-454,2020,passed
+Kentucky,KY-565,2022,passed
+Louisiana,LA-676,2023,failed
+Oklahoma,OK-787,2021,in progress
+Connecticut,CT-898,2022,passed
+Iowa,IA-909,2020,failed
+Nevada,NV-020,2023,passed

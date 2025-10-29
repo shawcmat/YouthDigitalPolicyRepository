@@ -48,11 +48,15 @@ server <- function(input, output, session) {
 
   output$map <- renderLeaflet({
     df <- state_summary()
+    conus_bounds <- c(-125, 25, -66, 50)
     if(nrow(df) == 0){
-      leaflet() %>% addProviderTiles(providers$CartoDB.Positron)
+      leaflet() %>%
+        addProviderTiles(providers$CartoDB.Positron) %>%
+        fitBounds(conus_bounds[1], conus_bounds[2], conus_bounds[3], conus_bounds[4])
     }else{
       leaflet() %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
+        fitBounds(conus_bounds[1], conus_bounds[2], conus_bounds[3], conus_bounds[4]) %>%
       addPolygons(data = df,
                   layerId = ~state,
                   label=~lapply(popup, htmltools::HTML),
@@ -62,7 +66,7 @@ server <- function(input, output, session) {
                          status == "in progress" ~ yellow,
                          status == "none" ~ other
                        ),
-                       fillOpacity=0.7,
+                       fillOpacity=1,
                        color = "black",
                        weight = 1)
     }

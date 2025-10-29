@@ -1,5 +1,4 @@
 .container-fluid {
-    background-color : #092852;
     color : #fabd00
 }
 
@@ -9,7 +8,7 @@
 }
 
 .card {
-    background-color: whitesmoke;
+    background-color: rgba(91, 146, 228, 1);
     padding: 1em;
     color: black;
     border-radius: 3%;
@@ -17,4 +16,10 @@
 
 .well {
     border-radius: 6%;
+    background-color: rgba(91, 146, 228, 1);
+    
+}
+
+.navbar {
+    background-color: rgba(91, 146, 228, 1);
 }

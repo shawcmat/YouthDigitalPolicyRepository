@@ -1,3 +1,85 @@
+# Load required libraries
+library(shiny)
+library(leaflet)
+library(dplyr)
+library(readr)
+library(plotly)
+library(sf)
+library(htmltools)
+library(bslib)
+
+red <- "#C64756"
+yellow <- "#FAD586"
+green  <- "#184D47"
+other <- "#808080"
+
+# Read the data (Using testdata right now)
+bills <- read.csv("./data/testdata.csv")
+
+# Load USA state geometry.
+state_boundaries <- st_read("./data/state_boundaries.geojson")
+
+# Merge bill data with state boundaries
+bills_map <- merge(bills, state_boundaries, by.x="state", by.y="name", all.x=TRUE, all.y = TRUE) %>% st_as_sf()
+
+bills_map$year <- as.character(bills_map$year)
+bills_map$year <- coalesce(bills_map$year, "none")
+bills_map$statute_number <- coalesce(bills_map$statute_number, "none")
+bills_map$status <- coalesce(bills_map$status, "none")
+
+# Get unique state names for a state filter
+unique_states <- sort(unique(bills$state))
+
+
+#----------------------------------------
+#
+#      UI SECTION
+#
+#----------------------------------------
+
+
+ui <- bslib::page_navbar(
+  # Main site title
+  title = "YDPR",
+  # Include CSS in the header
+  header = tags$head(
+    includeCSS("www/styles.css")
+  ),
+  bslib::nav_spacer(),
+  bslib::nav_panel(
+    title = "Dashboard", # The title that appears in the navbar tab
+    h1("Youth Digital Policy Repository"),
+    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+    h4("Last Update: June 2025"),
+    tags$div(leafletOutput("map", height = 600)),
+    fluidRow(
+      column(4, selectInput("year", "Select Year:", 
+                  choices = c("All", sort(unique(bills$year))), 
+                  selected = "All")),
+      column(4, selectInput("status", "Select Status:", 
+                  choices = c("All", unique(bills$status)), 
+                  selected = "All")),
+      column(4, selectInput("state_filter", "Select State:", 
+                  choices = c("All", unique_states), # Use the variable from global.r
+                  selected = "All"))),
+    #br(),
+    #tags$div(class = "card", plotlyOutput("pie", height = 300)),
+    #br(),
+    tags$div(class = "card", tableOutput("table"))
+  ),
+  bslib::nav_panel(
+    title = "About",
+    h1("About"),
+    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+  ),
+)
+
+#----------------------------------------
+#
+#      SERVER SECTION
+#
+#----------------------------------------
+
 server <- function(input, output, session) {  
   filtered <- reactive({
     req(input$year, input$status, input$state_filter)
@@ -94,3 +176,5 @@ server <- function(input, output, session) {
     filtered() %>% as.data.frame() %>% select(state, statute_number, year, status) %>% filter(status != "none")
   })
 }
+
+shinyApp(ui, server)

@@ -1,0 +1,33 @@
+state,statute_number,year,status,url
+California,CA-100,2020,failed,https://calcog.org/bill-tracker/
+California,CA-101,2021,passed,https://calcog.org/bill-tracker/
+California,CA-102,2022,in progress,https://calcog.org/bill-tracker/
+Texas,TX-202,2022,failed,https://calcog.org/bill-tracker/
+New York,NY-303,2020,in progress,https://calcog.org/bill-tracker/
+Florida,FL-404,2023,passed,https://calcog.org/bill-tracker/
+Illinois,IL-505,2021,failed,https://calcog.org/bill-tracker/
+Ohio,OH-606,2022,passed,https://calcog.org/bill-tracker/
+Georgia,GA-707,2023,in progress,https://calcog.org/bill-tracker/
+Washington,WA-808,2020,passed,https://calcog.org/bill-tracker/
+Arizona,AZ-909,2021,failed,https://calcog.org/bill-tracker/
+Massachusetts,MA-010,2022,passed,https://calcog.org/bill-tracker/
+Michigan,MI-111,2023,in progress,https://calcog.org/bill-tracker/
+Pennsylvania,PA-212,2021,passed,https://calcog.org/bill-tracker/
+North Carolina,NC-313,2022,failed,https://calcog.org/bill-tracker/
+Virginia,VA-414,2020,passed,https://calcog.org/bill-tracker/
+Colorado,CO-515,2023,passed,https://calcog.org/bill-tracker/
+Minnesota,MN-616,2021,failed,https://calcog.org/bill-tracker/
+Oregon,OR-717,2022,in progress,https://calcog.org/bill-tracker/
+New Jersey,NJ-818,2020,passed,https://calcog.org/bill-tracker/
+Tennessee,TN-919,2023,failed,https://calcog.org/bill-tracker/
+Maryland,MD-020,2021,passed,https://calcog.org/bill-tracker/
+Alabama,AL-121,2022,passed,https://calcog.org/bill-tracker/
+Wisconsin,WI-232,2023,in progress,https://calcog.org/bill-tracker/
+Missouri,MO-343,2021,failed,https://calcog.org/bill-tracker/
+South Carolina,SC-454,2020,passed,https://calcog.org/bill-tracker/
+Kentucky,KY-565,2022,passed,https://calcog.org/bill-tracker/
+Louisiana,LA-676,2023,failed,https://calcog.org/bill-tracker/
+Oklahoma,OK-787,2021,in progress,https://calcog.org/bill-tracker/
+Connecticut,CT-898,2022,passed,https://calcog.org/bill-tracker/
+Iowa,IA-909,2020,failed,https://calcog.org/bill-tracker/
+Nevada,NV-020,2023,passed,https://calcog.org/bill-tracker/

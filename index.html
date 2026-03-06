@@ -2,71 +2,90 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YPDR</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="www/YPDR.css">
+    <link rel="stylesheet" href="www/YDPR.css">
 </head>
 
 <div id = "navbar">
     <nav class="navbar">
-        <div class="logo">YPDR</div>
+        <div class="logo" href="#dashboard"><h2>YDPR</h2></div>
         <ul class="nav-links">
-          <li><a href="#dashboard">Dashboard</a></li>
+          <li><a href="#dashboard" class="active">Dashboard</a></li>
           <li><a href="#about">About</a></li>
         </ul>
     </nav>
 </div>
 
 <body>
-    <div id = "content">
-        <div id = "intro">
-            <h1>Youth Digital Policy Repository</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in 
-            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-             sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <h4>Last Update: June 2025</h4>
-        </div>
-        <div id="map-section">
-            <div id="map"></div>
-            <div id="controls">
-                <label for="yearFilter">Select Year:</label>
-                <select id="yearFilter">
-                    <option value="All">All</option>
-                </select>
-                <label for="statusFilter">Select Status:</label>
-                <select id="statusFilter">
-                    <option value="All">All</option>
-                </select>
-                <label for="stateFilter">Select State:</label>
-                <select id="stateFilter">
-                    <option value="All">All</option>
-                </select>
+    <section id = "dashboard" class="view active-view">
+        <div class = "content">
+            <div id = "intro">
+                <h1>Youth Digital Policy Repository</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+                ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in 
+                voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum. <a href="#about"> Learn more</a></p>
+                <h4>Last Update: June 2025</h4>
             </div>
+            <div id="map-section">
+                <div id="map"></div>
+                <div id="controls">
+                    <label for="yearFilter">Select Year:</label>
+                    <select id="yearFilter">
+                        <option value="All">All</option>
+                    </select>
+                    <label for="statusFilter">Select Status:</label>
+                    <select id="statusFilter">
+                        <option value="All">All</option>
+                    </select>
+                    <label for="stateFilter">Select State:</label>
+                    <select id="stateFilter">
+                        <option value="All">All</option>
+                    </select>
+                    <button id="resetFilters">Reset Filters</button>
+                </div>
+            </div>
+            <div id="container">
+                <div id="table-section">
+                    <table id="billTable" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>State</th>
+                                <th>Year</th>
+                                <th>Statute</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id = "about" class="view">
+        <div class = "content">
+            <h1>About the Data</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+                ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in 
+                voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                unt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <h1>Citation</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua.</p>
         </div>
 
-        <div id="container">
-            <div id="table-section">
-                <table id="billTable" class="display" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>State</th>
-                            <th>Year</th>
-                            <th>Statute</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-        </div>
-        </div>
+    </section>
+   
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-        <script src="www/YPDR.js"></script>
+        <script src="www/YDPR.js"></script>
     
 </body>
 </html>

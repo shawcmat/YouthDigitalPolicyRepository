@@ -31,7 +31,19 @@ async function init() {
             // Initialize All Filters
             populateFilter('yearFilter', 'year');
             populateFilter('statusFilter', 'status');
-            populateFilter('stateFilter', 'state');
+
+            // Populate state filter from GeoJSON so all states appear,
+            // even those with zero policies in the dataset
+            const allStateNames = statesDataGlobal.features
+                .map(f => f.properties.name)
+                .sort();
+            const stateSelect = document.getElementById('stateFilter');
+            allStateNames.forEach(name => {
+                const opt = document.createElement('option');
+                opt.value = name;
+                opt.innerHTML = name;
+                stateSelect.appendChild(opt);
+            });
             
             // Initial Draw
             updateDashboard();
@@ -41,6 +53,15 @@ async function init() {
                 document.getElementById(id).addEventListener('change', () => {
                     updateDashboard();
                 });
+            });
+
+            // Reset all filters to 'All' and re-center map
+            document.getElementById('resetFilters').addEventListener('click', () => {
+                ['yearFilter', 'statusFilter', 'stateFilter'].forEach(id => {
+                    document.getElementById(id).value = 'All';
+                });
+                map.setView([37.8, -96], 4);
+                updateDashboard();
             });
         }
     });
@@ -135,10 +156,12 @@ function updateDashboard() {
                         if (counts.hasOwnProperty(s)) counts[s]++;
                     });
 
-                    // 3. Format the breakdown string for the popup
-                    const statusSummary = `Passed: ${counts["passed"]}, ` +
-                                         `In Progress: ${counts["in progress"]}, ` +
-                                         `Failed: ${counts["failed"]}`;
+                    // 3. Format the breakdown string, only including statuses with a non-zero count
+                    const labels = { "passed": "Passed", "in progress": "In Progress", "failed": "Failed" };
+                    const statusSummary = Object.entries(counts)
+                        .filter(([, count]) => count > 0)
+                        .map(([status, count]) => `${labels[status]}: ${count}`)
+                        .join(', ');
 
                     targetLayer.bindPopup(`<strong>${stateName}</strong><br>${statusSummary}`, {
                         closeButton: false,
@@ -150,13 +173,81 @@ function updateDashboard() {
                     e.target.closePopup();
                 },
                 click: function(e) {
-                    document.getElementById('stateFilter').value = stateName;
+                    const stateFilter = document.getElementById('stateFilter');
+                    // If this state is already selected, reset to All; otherwise select it
+                    stateFilter.value = (stateFilter.value === stateName) ? 'All' : stateName;
                     updateDashboard();
+                    if (stateFilter.value == 'All'){
+                        map.setView([37.8, -96], 4);
+                    }else{}
                     map.fitBounds(e.target.getBounds());
                 }
             });
         }
     }).addTo(map);
 }
+
+// Shared function to switch the active view and update navbar highlighting.
+// Called by both navbar links and any in-content links that target a section ID.
+// pushHistory: set to false when called from popstate (browser back/forward),
+// so we don't push a duplicate entry onto the history stack.
+function switchView(targetId, pushHistory = true) {
+    // 1. Remove 'active-view' from all sections
+    document.querySelectorAll('.view').forEach(view => {
+        view.classList.remove('active-view');
+    });
+
+    // 2. Add 'active-view' to the target section
+    const targetSection = document.getElementById(targetId);
+    if (targetSection) {
+        targetSection.classList.add('active-view');
+    }
+
+    // 3. Update Navbar highlighting to match the active section
+    document.querySelectorAll('.nav-links a').forEach(nav => {
+        const navTarget = nav.getAttribute('href').substring(1);
+        nav.classList.toggle('active', navTarget === targetId);
+    });
+
+    // 4. Fix Leaflet map rendering if switching back to dashboard
+    if (targetId === 'dashboard' && map) {
+        setTimeout(() => map.invalidateSize(), 100);
+    }
+
+    // 5. Push a history entry so the browser back/forward buttons work
+    if (pushHistory) {
+        history.pushState({ view: targetId }, '', `#${targetId}`);
+    }
+}
+
+// When the user hits back or forward, restore the view from history state
+window.addEventListener('popstate', function(e) {
+    const targetId = e.state?.view ?? 'dashboard';
+    switchView(targetId, false);
+});
+
+// On first load, replace the initial history entry with the current view,
+// so the back button has a valid state to return to
+const initialView = location.hash.substring(1) || 'dashboard';
+history.replaceState({ view: initialView }, '', `#${initialView}`);
+
+// Bind switchView to navbar links
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        switchView(this.getAttribute('href').substring(1));
+    });
+});
+
+// Bind switchView to any in-content links whose href matches a section ID (e.g. href="#about")
+document.querySelectorAll('.view a[href^="#"]').forEach(link => {
+    const targetId = link.getAttribute('href').substring(1);
+    if (document.getElementById(targetId)?.classList.contains('view')) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            switchView(targetId);
+        });
+    }
+});
 
 init();

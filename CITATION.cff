@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: ""
+authors:
+  - family-names: "Vigil"
+    given-names: "Samantha"
+    orcid: "https://orcid.org/0009-0000-9158-386X"
+    affiliation: "University of California, Davis"
+  - family-names: "Shawcroft"
+    given-names: "Matthew"
+    orcid: "https://orcid.org/0009-0004-0503-5568"
+    affiliation: "University of California, Davis"
+title: "Youth Digital Media Policy Repository"
+version: 1.0.0
+doi:  
+date-released: 2026-03-05
+url: "https://github.com/your-org-name/your-repo-name"
+repository-code: "https://github.com/your-org-name/your-repo-name"
+license: CC-BY-4.0
+keywords:
+  - ""
+  - ""
+  - ""

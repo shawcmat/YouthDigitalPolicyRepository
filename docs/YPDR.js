@@ -21,7 +21,7 @@ async function init() {
     statesDataGlobal = await geoResponse.json();
 
     // Load CSV using PapaParse
-    Papa.parse("data/testdata.csv", {
+    Papa.parse("../testdata.csv", {
         download: true,
         header: true,
         skipEmptyLines: true,

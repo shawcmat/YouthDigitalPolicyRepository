@@ -1,21 +1,21 @@
 
 @font-face {
   font-family: 'Roboto Condensed Bold';
-  src: url('./www/fonts/RobotoCondensed-Bold.woff') format('woff');
+  src: url('./fonts/RobotoCondensed-Bold.woff') format('woff');
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Roboto Condensed Regular';
-  src: url('./www/fonts/RobotoCondensed-Regular.woff') format('woff');
+  src: url('./fonts/RobotoCondensed-Regular.woff') format('woff');
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Roboto Condensed Thin';
-  src: url('./www/fonts/RobotoCondensed-Thin.woff') format('woff');
+  src: url('./fonts/RobotoCondensed-Thin.woff') format('woff');
   font-style: normal;
   font-display: swap;
 }

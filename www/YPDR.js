@@ -17,11 +17,11 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').ad
 
 // Load Data
 async function init() {
-    const geoResponse = await fetch('data/state_boundaries.geojson');
+    const geoResponse = await fetch('www/data/state_boundaries.geojson');
     statesDataGlobal = await geoResponse.json();
 
     // Load CSV using PapaParse
-    Papa.parse("YPDR_Data.csv", {
+    Papa.parse("YDPR_Data.csv", {
         download: true,
         header: true,
         skipEmptyLines: true,
